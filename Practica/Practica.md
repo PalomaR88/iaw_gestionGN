@@ -123,19 +123,18 @@ Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ~~~
 
-Y en la nueva página 
+Y en la página se accede con el usuario admin.
+![Admin](aimg.png)
+![bd](bimg.png)
+
 
 - Ejecuta el servidor web de desarrollo y comprueba en el navegador que la aplicación está funcionando. Accede con el usuario usuario (contraseña: asdasd1234).
+![usuario](cimg.png)
+![usuario1](dimg.png)
 
 
 
-
-
-
-
-
-
-En este momento, muestra al profesor la aplicación funcionando. Entrega una documentación resumida donde expliques los pasos fundamentales para realizar esta tarea. (3 puntos)
+En este momento, muestra al profesor la aplicación funcionando. Entrega una documentación resumida donde expliques los pasos fundamentales para realizar esta tarea.
 
 
 **Tarea 2: Desarrollando nuestra aplicación**
@@ -143,9 +142,25 @@ En este momento, muestra al profesor la aplicación funcionando. Entrega una doc
 Vamos a realizar un cambio en la aplicación y comprobar que los cambios se realizan correctamente.
 - Modifica la página inicial de la aplicación para que aparezca tu nombre.
 
-- Sube los cambios al repositorio
+En templates/base.html se modifica una línea para que aparezca el nombre:
+~~~
+      <div class="masthead">
+        <h3 class="text-muted">Gestiona - IES Gonzalo Nazareno</h3>
+        <a>Paloma R.<a>
+      </div>
+~~~
 
-Muestra una captura de pantalla donde sea la modificación realizada. (1 punto)
+- Sube los cambios al repositorio
+~~~
+paloma@coatlicue:~/DISCO2/CICLO II/IMPLANTACIÓN DE APLICACIONES WEB/iaw_ge
+stionGN$ git commit -am 'añadir nombre'
+paloma@coatlicue:~/DISCO2/CICLO II/IMPLANTACIÓN DE APLICACIONES WEB/iaw_ge
+stionGN$ git push
+~~~
+
+Muestra una captura de pantalla donde sea la modificación realizada.
+
+![nombre](eimg.png)
 
 
 **Tarea 3: Entorno de producción**
@@ -153,10 +168,69 @@ Muestra una captura de pantalla donde sea la modificación realizada. (1 punto)
 Vamos a realizar el despliegue de nuestra aplicación en un entorno de producción, para ello vamos a utilizar una instancia del cloud, para ello:
 
 - Instala en el servidor los servicios necesarios (apache2, mysql, …). Instala el módulo de apache2 para ejecutar código python.
+~~~
+debian@python:~$ sudo apt install apache2
+debian@python:~$ sudo apt install libapache2-mod-wsgi-py3
+debian@python:~$ sudo apt install mysql-common 
+debian@python:~$ sudo apt install git
+~~~
+
 
 - Clona tu repositorio en el DocumentRoot de tu virtualhost.
+Se va a utilizar el .conf por defecto, cuya configuración del DocumentRoot es la siguiente:
+~~~
+debian@python:~$ cat /etc/apache2/sites-available/000-default.conf 
+<VirtualHost *:80>
+...
+	ServerAdmin webmaster@localhost
+	DocumentRoot /var/www/html
+...
+~~~
+
+Habrá que clonar el repositorio en /var/www/html:
+~~~
+debian@python:/var/www/html$ sudo git clone https://github.com/PalomaR88/iaw_gestionGN.git
+~~~
+
 
 - Crea un entorno virtual e instala las dependencias de tu aplicación.
+
+Creación del entorno:
+~~~
+debian@python:~$ mkdir virtualend
+debian@python:~$ cd virtualend/
+debian@python:~/virtualend$ sudo apt install python3-venv
+debian@python:~/virtualend$ python3 -m venv django
+debian@python:~/virtualend$ source django/bin/activate
+(django) debian@python:~/virtualend$ 
+~~~
+
+Instalación de paquetes:
+~~~
+(django) debian@python:/var/www/html/iaw_gestionGN$ pip install -r requirements.txt 
+~~~
+
+> De nuevo, hace falta algunas dependencias para que se descarguen todos los paquetes que aparecen en el requeriment.txt
+~~~
+(django) debian@python:/var/www/html/iaw_gestionGN$ sudo apt-get install python3 python-dev python3-dev build-essential libssl-dev libffi-dev libxml2-dev libxslt1-dev zlib1g-dev python-pip libjpeg-dev
+~~~
+
+~~~
+(django) debian@python:/var/www/html/iaw_gestionGN$ pip freeze
+Django==2.2.7
+html5lib==1.0b8
+olefile==0.46
+Pillow==4.0.0
+pkg-resources==0.0.0
+PyPDF2==1.26.0
+pytz==2019.3
+reportlab==3.3.0
+six==1.10.0
+sqlparse==0.3.0
+webencodings==0.5
+xhtml2pdf==0.0.6
+~~~
+
 
 - Instala el módulo que permite que python trabaje con mysql:
 ~~~
@@ -170,7 +244,46 @@ Vamos a realizar el despliegue de nuestra aplicación en un entorno de producci�
 
 - Configura un virtualhost en apache2 con la configuración adecuada para que funcione la aplicación. El punto de entrada de nuestro servidor será iaw_gestionGN/gestion/wsgi.py.
 
+Se modifica el fichero .conf de Apache:
+~~~
+<VirtualHost *:80>
+	ServerName www.djangoapache.com
+	ServerAdmin webmaster@localhost
+	DocumentRoot /var/www/html
+	
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+	WSGIScriptAlias / /var/www/html/iaw_gestionGN/gestion/wsgi.py
+	WSGIDaemonProcess django user=www-data group=www-data processes=5 python-path=/var/www/html/iaw_gestionGN
+	<Directory /var/www/html/iaw_gestionGN/gestion>
+		WSGIProcessGroup django
+		WSGIApplicationGroup %{GLOBAL}
+		Require all granted
+	</Directory>
+
+</VirtualHost>
+~~~
+
+También se modificará el propietario de todos los ficheros del documentRoot:
+~~~
+(django) debian@python:/var/www/html$ sudo chown -R www-data:www-data iaw_gestionGN/
+~~~
+
+Hay que añadir el nombre del servidor en el fichero settings.py:
+~~~
+ALLOWED_HOSTS = ['www.djangoapache.com']
+~~~
+
+Se activa el módulo wsgi y se reinicia Apache:
+~~~
+(django) debian@python:/var/www/html$ sudo a2enmod wsgi
+Module wsgi already enabled
+(django) debian@python:/var/www/html$ sudo systemctl restart apache2.service
+~~~
+
 - Crea una base de datos y un usuario en mysql.
+
 
 - Configura la aplicación para trabajar con mysql, para ello modifica la configuración de la base de datos en el archivo settings.py:
 ~~~
