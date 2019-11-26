@@ -398,8 +398,83 @@ Vamos a realizar cambios en el entorno de desarrollo y posteriormente vamos a su
 
 - Modifica la página inicial para que muestre otra imagen. Despliega los cambios en el servidor de producción.
 
+Primero se modifica en desarrollo. 
+![imgagen_desarrollo](himg.png)
+
+Despúes hay que subir los cambios al repositorio de GitHub y lo llevan los cambios a producción.
+~~~
+paloma@coatlicue:~/DISCO2/CICLO II/IMPLANTACIÓN DE APLICACIONES WEB/iaw_ge
+stionGN$ git commit -m 'a ver'
+En la rama master
+Tu rama está actualizada con 'origin/master'.
+
+Cambios no rastreados para el commit:
+	modificado:     static/img/iesgn.jpg
+
+Archivos sin seguimiento:
+	Practica/himg.png
+
+no se agregaron cambios al commit
+paloma@coatlicue:~/DISCO2/CICLO II/IMPLANTACIÓN DE APLICACIONES WEB/iaw_ge
+stionGN$ git commit -am 'cambios en la imagen principal'
+[master ec7faf8] cambios en la imagen principal
+ Committer: Paloma R <paloma@coatlicue.nahualt>
+Tu nombre y correo fueron configurados automáticamente basados
+en tu usuario y nombre de host. Por favor verifica que son correctos.
+Tu puedes suprimir este mensaje configurándolos de forma explicita. Ejecuta el 
+siguiente comando y sigue las instrucciones de tu editor
+ para modificar tu archivo de configuración:
+
+    git config --global --edit
+
+Tras hacer esto, puedes arreglar la identidad usada para este commit con:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 Practica/himg.png
+ rewrite static/img/iesgn.jpg (98%)
+paloma@coatlicue:~/DISCO2/CICLO II/IMPLANTACIÓN DE APLICACIONES WEB/iaw_ge
+stionGN$ git push
+Enumerando objetos: 12, listo.
+Contando objetos: 100% (12/12), listo.
+Compresión delta usando hasta 2 hilos
+Comprimiendo objetos: 100% (7/7), listo.
+Escribiendo objetos: 100% (7/7), 259.30 KiB | 11.79 MiB/s, listo.
+Total 7 (delta 3), reusado 0 (delta 0)
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.
+To github.com:PalomaR88/iaw_gestionGN.git
+   dc21584..ec7faf8  master -> master
+~~~
+
+~~~
+(django) debian@python:/var/www/html/iaw_gestionGN$ sudo git pull
+remote: Enumerating objects: 16, done.
+remote: Counting objects: 100% (16/16), done.
+remote: Compressing objects: 100% (12/12), done.
+remote: Total 16 (delta 5), reused 15 (delta 4), pack-reused 0
+Unpacking objects: 100% (16/16), done.
+From https://github.com/PalomaR88/iaw_gestionGN
+   a4c5ddd..ec7faf8  master     -> origin/master
+Updating a4c5ddd..ec7faf8
+Fast-forward
+ Practica/Practica.md | 455 +++++++++++++++++++++++++++++++++++++++++++++
+ Practica/fimg.png    | Bin 0 -> 241972 bytes
+ Practica/gimg.png    | Bin 0 -> 232284 bytes
+ Practica/himg.png    | Bin 0 -> 197660 bytes
+ static/img/iesgn.jpg | Bin 29353 -> 73483 bytes
+ 5 files changed, 455 insertions(+)
+ create mode 100644 Practica/fimg.png
+ create mode 100644 Practica/gimg.png
+ create mode 100644 Practica/himg.png
+~~~
+
+![imagen_produccion](iimg.png)
+
+
+
 - Vamos a crear una nueva tabla en la base de datos, para ello sigue los siguientes pasos:
-1. Añade un n uevo modelo al fichero centro/models.py:
+1. Añade un nuevo modelo al fichero centro/models.py:
 ~~~
      class Modulos(models.Model):	
          Abr = models.CharField(max_length=4)
@@ -414,8 +489,23 @@ Vamos a realizar cambios en el entorno de desarrollo y posteriormente vamos a su
 ~~~
 
 2. Crea una nueva migración: python3 manage.py makemigrations.
+~~~
+(django) paloma@coatlicue:~/DISCO2/CICLO II/IMPLANTACIÓN DE APLICACIONES W
+EB/iaw_gestionGN$ python3 manage.py makemigrations
+Migrations for 'centro':
+  centro/migrations/0007_modulos.py
+    - Create model Modulos
+~~~
 
 3. Y realiza la migración: python3 manage.py migrate
+~~~
+(django) paloma@coatlicue:~/DISCO2/CICLO II/IMPLANTACIÓN DE APLICACIONES W
+EB/iaw_gestionGN$ python3 manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, centro, contenttypes, convivencia, sessions
+Running migrations:
+  Applying centro.0007_modulos... OK
+~~~
 
 4. Añade el nuevo modelo al sitio de administración de django:
 
@@ -433,6 +523,9 @@ Y añade al final la siguiente línea:
 ~~~
 admin.site.register(Modulos)
 ~~~
+
+![imagen_produccion](jimg.png)
+
 
 - Despliega el cambio producido al crear la nueva tabla en el entorno de producción.
 
