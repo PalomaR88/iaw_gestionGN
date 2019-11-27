@@ -529,6 +529,84 @@ admin.site.register(Modulos)
 
 - Despliega el cambio producido al crear la nueva tabla en el entorno de producción.
 
+En desarrollo:
+~~~
+(django) paloma@coatlicue:~/DISCO2/CICLO II/IMPLANTACIÓN DE APLICACIONES WEB/iaw_gestionGN$ git commit -m 'a ver'
+En la rama master
+Tu rama está actualizada con 'origin/master'.
+
+Archivos sin seguimiento:
+	Practica/iimg.png
+	Practica/jimg.png
+	centro/migrations/0007_modulos.py
+
+no hay nada agregado para confirmar, pero hay archivos sin seguimiento presentes
+(django) paloma@coatlicue:~/DISCO2/CICLO II/IMPLANTACIÓN DE APLICACIONES WEB/iaw_gestionGN$ git add Practica/iimg.png Practica/jimg.png centro/migrations/0007_modulos.py 
+(django) paloma@coatlicue:~/DISCO2/CICLO II/IMPLANTACIÓN DE APLICACIONES WEB/iaw_gestionGN$ git commit -m 'subo modulo' 
+[master 8428483] subo modulo
+ Committer: Paloma R <paloma@coatlicue.nahualt>
+Tu nombre y correo fueron configurados automáticamente basados
+en tu usuario y nombre de host. Por favor verifica que son correctos.
+Tu puedes suprimir este mensaje configurándolos de forma explicita. Ejecuta el 
+siguiente comando y sigue las instrucciones de tu editor
+ para modificar tu archivo de configuración:
+
+    git config --global --edit
+
+Tras hacer esto, puedes arreglar la identidad usada para este commit con:
+
+    git commit --amend --reset-author
+
+ 3 files changed, 27 insertions(+)
+ create mode 100644 Practica/iimg.png
+ create mode 100644 Practica/jimg.png
+ create mode 100644 centro/migrations/0007_modulos.py
+(django) paloma@coatlicue:~/DISCO2/CICLO II/IMPLANTACIÓN DE APLICACIONES WEB/iaw_gestionGN$ git commit -am 'subo modulo' 
+En la rama master
+Tu rama está adelantada a 'origin/master' por 1 commit.
+  (usa "git push" para publicar tus commits locales)
+
+nada para hacer commit, el árbol de trabajo está limpio
+(django) paloma@coatlicue:~/DISCO2/CICLO II/IMPLANTACIÓN DE APLICACIONES WEB/iaw_gestionGN$ git push
+Enumerando objetos: 12, listo.
+Contando objetos: 100% (12/12), listo.
+Compresión delta usando hasta 2 hilos
+Comprimiendo objetos: 100% (8/8), listo.
+Escribiendo objetos: 100% (8/8), 255.91 KiB | 12.79 MiB/s, listo.
+Total 8 (delta 4), reusado 0 (delta 0)
+remote: Resolving deltas: 100% (4/4), completed with 4 local objects.
+To github.com:PalomaR88/iaw_gestionGN.git
+   4c1a2de..8428483  master -> master
+~~~
+
+En producción:
+~~~
+(django) debian@python:/var/www/html/iaw_gestionGN$ sudo git pull
+remote: Enumerating objects: 7, done.
+remote: Counting objects: 100% (7/7), done.
+remote: Compressing objects: 100% (6/6), done.
+remote: Total 7 (delta 1), reused 2 (delta 1), pack-reused 0
+Unpacking objects: 100% (7/7), done.
+From https://github.com/PalomaR88/iaw_gestionGN
+   ec7faf8..4c1a2de  master     -> origin/master
+Updating ec7faf8..4c1a2de
+Fast-forward
+ Practica/Practica.md | 95 +++++++++++++++++++++++++++++++++++++++++++++-
+ centro/admin.py      |  4 +-
+ centro/models.py     | 10 ++++-
+ 3 files changed, 106 insertions(+), 3 deletions(-)
+(django) debian@python:/var/www/html/iaw_gestionGN$ python3 manage.py makemigrations
+(django) debian@python:/var/www/html/iaw_gestionGN$ python3 manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, centro, contenttypes, convivencia, sessions
+Running migrations:
+  Applying centro.0007_modulos... OK
+(django) debian@python:/var/www/html/iaw_gestionGN$ ./manage.py loaddata datos.json 
+Installed 89 object(s) from 1 fixture(s)
+
+~~~
+
+
 Entrega una documentación resumida donde expliques los pasos fundamentales para realizar esta tarea. En este momento, muestra al profesor la aplicación funcionando en el otro hosting. (4 puntos)
 
 **Tarea 5: Despliegue de nuestra aplicación en un hosting python: pythonanywhere**
