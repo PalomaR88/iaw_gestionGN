@@ -606,15 +606,56 @@ Installed 89 object(s) from 1 fixture(s)
 
 ~~~
 
+![modulo](kimg.png)
 
-Entrega una documentación resumida donde expliques los pasos fundamentales para realizar esta tarea. En este momento, muestra al profesor la aplicación funcionando en el otro hosting. (4 puntos)
+
 
 **Tarea 5: Despliegue de nuestra aplicación en un hosting python: pythonanywhere**
 
 - Siguiendo la documentación despliega nuestra aplicación django en pythonanwhere. Utiliza git para desplegar los ficheros y crea una base de datos en tu proyecto. Si con la documentación no es suficiente puede seguir mi documento: Despliegue de aplicación flask en hosting pythonanywhere.
 
-Entrega una breve documentación donde expliques los pasos más importantes para el despliegue en pythonanywhere (3 puntos)
+Se accede a [pythonanywhere](https://www.pythonanywhere.com/). Se selecciona la opción "Start runnung Python online in less than a minute!" > "Create a Beginner account". Y se compleata los datos personales que pide para logearse.
 
+Una vez confirmada la dirección de correo del usuario, se selecciona la opción base de datos y se agrega una contraseña.
+
+![modulo](limg.png)
+
+Se cloona el repositorio de GitHub:
+~~~
+08:35 ~ $ git clone https://github.com/PalomaR88/iaw_gestionGN.git
+~~~
+
+Se modifica el fichero gestion/settings.py para indicar la base de datos:
+~~~
+DATABASES = {
+        SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://PalomaR88:usuario1234@
+PalomaR88.mysql.pythonanywhere-services.com/PalomaR88$default'
+    }
+}
+~~~
+
+A continuación vamos a crear la aplicación web, en la pestaña Web del sitio pythonanywhere. Y se crea el entorno virtual para descargar los paquetes que hay en requeriments.txt:
+~~~
+09:10 ~ $ mkvirtualenv --python=/usr/bin/python3.4 flask
+Running virtualenv with interpreter /usr/bin/python3.4
+Already using interpreter /usr/bin/python3.4
+Using base prefix '/usr'
+New python executable in /home/PalomaR88/.virtualenvs/flask/bin/python3.4
+Also creating executable in /home/PalomaR88/.virtualenvs/flask/bin/python
+Installing setuptools, pip<19.2, wheel...
+done.
+virtualenvwrapper.user_scripts creating /home/PalomaR88/.virtualenvs/flas
+k/bin/predeactivate
+virtualenvwrapper.user_scripts creating /home/PalomaR88/.virtualenvs/flas
+k/bin/postdeactivate
+virtualenvwrapper.user_scripts creating /home/PalomaR88/.virtualenvs/flas
+k/bin/preactivate
+virtualenvwrapper.user_scripts creating /home/PalomaR88/.virtualenvs/flas
+k/bin/postactivate
+virtualenvwrapper.user_scripts creating /home/PalomaR88/.virtualenvs/flas
+k/bin/get_env_details
+(flask) 09:11 ~ $ pip install -r iaw_gestionGN/requirements.txt 
+~~~
 - Identificación de problemas: si estamos desarrollando una aplicación es necesario probarla, realizar test.
 
 - Identificación de problemas: además de lo anterior el equipo de desarrollo necesita ir haciendo otros procesos: analizando el código generado, generar documentación,…
@@ -624,3 +665,7 @@ Entrega una breve documentación donde expliques los pasos más importantes para
 - Identificación de problemas: Si seguimos una metodología ágil es deseable que todos los cambios que vayan realizando los programadores se vayan probando, analizando, … de forma continúa
 
 - Identificación de problemas: ¿Y si esas tareas las automatizamos? -> Integración continúa
+
+
+
+
