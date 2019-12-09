@@ -123,13 +123,13 @@ Quit the server with CONTROL-C.
 ~~~
 
 Y en la página se accede con el usuario admin.
-![Admin](aimg.png)
-![bd](bimg.png)
+![Admin](./images/aimg.png)
+![bd](./images/bimg.png)
 
 
 - Ejecuta el servidor web de desarrollo y comprueba en el navegador que la aplicación está funcionando. Accede con el usuario usuario (contraseña: asdasd1234).
-![usuario](cimg.png)
-![usuario1](dimg.png)
+![usuario](./images/cimg.png)
+![usuario1](./images/dimg.png)
 
 
 
@@ -159,7 +159,7 @@ stionGN$ git push
 
 Muestra una captura de pantalla donde sea la modificación realizada.
 
-![nombre](eimg.png)
+![nombre](./images/eimg.png)
 
 
 **Tarea 3: Entorno de producción**
@@ -384,8 +384,8 @@ MariaDB [gestiona]> show tables;
 - Desactiva en la configuración (fichero settings.py) el modo debug a False. Para que los errores de ejecución no den información sensible de la aplicación.
 
 - Muestra la página funcionando.
-![comprobacion1](fimg.png)
-![comprobacion2](gimg.png)
+![comprobacion1](./images/fimg.png)
+![comprobacion2](./images/gimg.png)
 
 
 
@@ -399,7 +399,7 @@ Vamos a realizar cambios en el entorno de desarrollo y posteriormente vamos a su
 - Modifica la página inicial para que muestre otra imagen. Despliega los cambios en el servidor de producción.
 
 Primero se modifica en desarrollo. 
-![imgagen_desarrollo](himg.png)
+![imgagen_desarrollo](./images/himg.png)
 
 Despúes hay que subir los cambios al repositorio de GitHub y lo llevan los cambios a producción.
 ~~~
@@ -469,7 +469,7 @@ Fast-forward
  create mode 100644 Practica/himg.png
 ~~~
 
-![imagen_produccion](iimg.png)
+![imagen_produccion](./images/iimg.png)
 
 
 
@@ -524,7 +524,7 @@ Y añade al final la siguiente línea:
 admin.site.register(Modulos)
 ~~~
 
-![imagen_produccion](jimg.png)
+![imagen_produccion](./images/jimg.png)
 
 
 - Despliega el cambio producido al crear la nueva tabla en el entorno de producción.
@@ -606,7 +606,7 @@ Installed 89 object(s) from 1 fixture(s)
 
 ~~~
 
-![modulo](kimg.png)
+![modulo](./images/kimg.png)
 
 
 
@@ -618,7 +618,7 @@ Se accede a [pythonanywhere](https://www.pythonanywhere.com/). Se selecciona la 
 
 Una vez confirmada la dirección de correo del usuario, se selecciona la opción base de datos y se agrega una contraseña.
 
-![modulo](limg.png)
+![modulo](./images/limg.png)
 
 Se cloona el repositorio de GitHub:
 ~~~
