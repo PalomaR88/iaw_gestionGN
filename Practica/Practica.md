@@ -1,6 +1,6 @@
 # Entorno de desarrollo y producción con aplicaciones web python
 
-**Tarea 1: Entorno de desarrollo**
+### Tarea 1: Entorno de desarrollo
 Formas parte del equipo de desarrollo de la aplicación “Gestión IESGN”, aplicación web desarrollada con python, con el framework django. Vamos a configurar tu equipo como entorno de desarrollo para trabajar con la aplicación, para ello:
 - Realiza un fork del repositorio de GitHub: https://github.com/jd-iesgn/iaw_gestionGN.
 
@@ -136,7 +136,7 @@ Y en la página se accede con el usuario admin.
 En este momento, muestra al profesor la aplicación funcionando. Entrega una documentación resumida donde expliques los pasos fundamentales para realizar esta tarea.
 
 
-**Tarea 2: Desarrollando nuestra aplicación**
+### Tarea 2: Desarrollando nuestra aplicación
 
 Vamos a realizar un cambio en la aplicación y comprobar que los cambios se realizan correctamente.
 - Modifica la página inicial de la aplicación para que aparezca tu nombre.
@@ -162,7 +162,7 @@ Muestra una captura de pantalla donde sea la modificación realizada.
 ![nombre](./images/eimg.png)
 
 
-**Tarea 3: Entorno de producción**
+### Tarea 3: Entorno de producción
 
 Vamos a realizar el despliegue de nuestra aplicación en un entorno de producción, para ello vamos a utilizar una instancia del cloud, para ello:
 
@@ -392,7 +392,7 @@ MariaDB [gestiona]> show tables;
 En este momento, muestra al profesor la aplicación funcionando. Entrega una documentación resumida donde expliques los pasos fundamentales para realizar esta tarea. (4 puntos)
 
 
-**Tarea 4: Modificación de la aplicación en el entorno de producción**
+## Tarea 4: Modificación de la aplicación en el entorno de producción
 
 Vamos a realizar cambios en el entorno de desarrollo y posteriormente vamos a subirlas a producción.
 
@@ -610,7 +610,7 @@ Installed 89 object(s) from 1 fixture(s)
 
 
 
-**Tarea 5: Despliegue de nuestra aplicación en un hosting python: pythonanywhere**
+### Tarea 5: Despliegue de nuestra aplicación en un hosting python: pythonanywhere
 
 - Siguiendo la documentación despliega nuestra aplicación django en pythonanwhere. Utiliza git para desplegar los ficheros y crea una base de datos en tu proyecto. Si con la documentación no es suficiente puede seguir mi documento: Despliegue de aplicación flask en hosting pythonanywhere.
 
